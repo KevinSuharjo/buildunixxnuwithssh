@@ -1,0 +1,21 @@
+name: Kernel SSH Debugger
+
+on:
+  workflow_dispatch:
+
+jobs:
+  ssh-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential bc bison flex libssl-dev libelf-dev libncurses-dev git zip curl wget
+
+      - name: Start SSH Terminal
+        uses: owenthereal/action-upterm@v1
+        with:
+          wait-timeout-minutes: 60
